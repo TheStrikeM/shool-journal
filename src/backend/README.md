@@ -10,8 +10,8 @@ Database: Postgresql
 Orm: TypeOrm
 ```
 
-<h2>DBModels</h2>
-<b>User models</b>
+<h2>Database models</h2>
+<b>User</b>
 ```typescript
 interface UserModel {
     id: number
@@ -24,7 +24,6 @@ interface UserModel {
     timeZone: string
     rating: number
     statuse: string
-    todoId: TodoModel
     personal: {
         fullname: {
             value: string
@@ -100,9 +99,10 @@ interface UserModel {
     notifications: NotificationModel[]
     friends: UserModel[]
     blog: BlogPostModel[]
-    invites: InviteModel[]
+    groupInvites: GroupInviteModel[]
+    friendInvites: FriendInviteModel[]
     files: FileModel[]
-    awards: AwardsModel[]
+    rewards: RewardsModel[]
     groups: GroupModel[]
 }
 
@@ -120,20 +120,23 @@ interface ManagerRoleModel {
 interface DirectorRoleModel {
     id: number
     name: 'Director'
-    shoolId: ShoolModel
+    shoolId: SchoolModel
 }
 
 interface TeacherRoleModel {
     id: number
     name: 'Teacher'
-    shoolId: ShoolModel
-    classId: ClassModel
+    plane: string
+    lesson: string
+    shoolId: SchoolModel
+    classId?: ClassModel
 }
 
 interface LearnerRoleModel {
     id: number
     name: 'Learner'
-    shoolId: ShoolModel
+    isLeader: boolean
+    shoolId: SchoolModel
     classId: ClassModel
     homeworks: HomeWorksModel[]
     score: ScoreModel[]
@@ -143,7 +146,7 @@ UserModel, AdminRoleModel,
 LearnerRoleModel, TeacherRoleModel, DirectorRoleModel,
 ManagerRoleModel
 
-<b>Group models</b>
+<b>Group</b>
 ```typescript
 interface GroupModel {
     id: number
@@ -154,6 +157,7 @@ interface GroupModel {
     owners: UserModel[]
     moders: UserModel[]
     members: UserModel[]
+    notifications: GroupNotificationModel[]
     private: {
         groupMembers: string
         file: string
@@ -164,5 +168,104 @@ interface GroupModel {
 interface CategoryGroupModel {
     id: number
     type: string
+}
+```
+GroupModel, CategoryGroupModel
+
+<b>Notifications</b>
+```typescript
+interface NotificationModel {
+    id: number
+    recipientId: UserModel 
+    title: string
+    desc: string
+}
+```
+NotificationModel
+
+<b>Invites</b>
+```typescript
+interface FriendInviteModel {
+    id: number
+    senderId: UserModel
+    recipientId: UserModel
+    confirmed: boolean
+}
+
+interface GroupInviteModel {
+    id: number
+    groupId: GroupModel
+    recipientId: UserModel
+    confirmed: boolean
+}
+```
+FriendInviteModel, GroupInviteModel
+
+<b>Rewards</b>
+```typescript
+interface RewardsModel {
+    id: number
+    title: string
+    desc: string
+    avatar: string
+    members: UserModel[]
+}
+```
+
+<b>JoinList</b>
+```typescript
+interface JoinModel {
+    id: number
+    userId: UserModel
+    date: Date
+    status: boolean
+    adress: string
+}
+```
+
+<b>School</b>
+```typescript
+interface SchoolModel {
+    id: number
+    name: string
+    rating: number
+    avatar: string
+    posts: SchoolPostModel[]
+    classes: ClassModel[]
+    contact: {
+        phone: string
+        adress: string
+    }
+    directorId: UserModel
+    teachers: UserModel[]
+    learners: UserModel[]
+    registredAt: Date
+    createdAt: Date
+}
+
+interface SchoolPostModel {
+    id: number
+    schoolId: SchoolModel
+    text: string
+    createAt: Date
+    authorId: UserModel
+}
+```
+
+<b>Class</b>
+```typescript
+interface ClassModel {
+    id: number
+    headId: UserModel
+    leaderId: UserModel
+    posts: ClassPostModel[]
+}
+
+interface ClassPostModel {
+    id: number
+    classId: ClassModel
+    text: string
+    createAt: Date
+    authorId: UserModel
 }
 ```
