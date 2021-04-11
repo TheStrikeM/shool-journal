@@ -1,16 +1,15 @@
-**Backend web application with microservice architecture**
+#Backend web application with microservice architecture
+#Name: online-journal
 
-##**Info**
+##Info
 Language: NodeJS
 Framework: NestJS
-
 Microservices: gRPC, Redis
-
 Database: Postgresql
 orm: TypeOrm
 
-##**DBModels**
-User and roles models
+##DBModels
+**User and roles models**
 ```typescript
 interface UserModel {
     id: number
@@ -139,7 +138,7 @@ interface LearnerRoleModel {
 }
 ```
 
-Group model
+**Group model**
 ```typescript
 interface GroupModel {
     id: number
