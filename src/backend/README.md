@@ -1,7 +1,7 @@
 #Backend web application with microservice architecture
-#Name: online-journal
+Name: online-journal
 
-##Info
+<h2>Info</h2>
 ```typescript
 Language: NodeJS
 Framework: NestJS
@@ -10,9 +10,8 @@ Database: Postgresql
 Orm: TypeOrm
 ```
 
-##DBModels
-
-User and roles models
+<h2>DBModels</h2>
+<b>User models</b>
 ```typescript
 interface UserModel {
     id: number
@@ -140,8 +139,11 @@ interface LearnerRoleModel {
     score: ScoreModel[]
 }
 ```
+UserModel, AdminRoleModel,
+LearnerRoleModel, TeacherRoleModel, DirectorRoleModel,
+ManagerRoleModel
 
-**Group model**
+<b>Group models</b>
 ```typescript
 interface GroupModel {
     id: number
