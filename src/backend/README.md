@@ -2,14 +2,17 @@
 #Name: online-journal
 
 ##Info
+```typescript
 Language: NodeJS
 Framework: NestJS
 Microservices: gRPC, Redis
 Database: Postgresql
-orm: TypeOrm
+Orm: TypeOrm
+```
 
 ##DBModels
-**User and roles models**
+
+User and roles models
 ```typescript
 interface UserModel {
     id: number
