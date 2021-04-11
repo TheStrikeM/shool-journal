@@ -256,9 +256,16 @@ interface SchoolPostModel {
 ```typescript
 interface ClassModel {
     id: number
+    schoolId: SchoolModel
     headId: UserModel
     leaderId: UserModel
     posts: ClassPostModel[]
+    contact: {
+        phone: string
+        adress: string
+    }
+    registredAt: Date
+    createAt: Date
 }
 
 interface ClassPostModel {
