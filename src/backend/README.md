@@ -14,7 +14,7 @@ Orm: TypeOrm
 <b>User</b>
 ```typescript
 interface UserModel {
-    id: number
+    id: numberId
     roleId: AdminRoleModel | ManagerRoleModel | DirectorRoleModel | TeacherRoleModel | LearnerRoleModel
     login: string
     password: string
@@ -211,6 +211,7 @@ interface RewardsModel {
     members: UserModel[]
 }
 ```
+RewardsModel
 
 <b>JoinList</b>
 ```typescript
@@ -222,6 +223,7 @@ interface JoinModel {
     adress: string
 }
 ```
+JoinModel
 
 <b>School</b>
 ```typescript
@@ -251,6 +253,7 @@ interface SchoolPostModel {
     authorId: UserModel
 }
 ```
+SchoolModel, SchoolPostModel
 
 <b>Class</b>
 ```typescript
@@ -276,3 +279,7 @@ interface ClassPostModel {
     authorId: UserModel
 }
 ```
+ClassModel, ClassPostModel
+
+<h2>Services</h2>
+file, mailer, user, auth, profile, admin, school, class, homeworks, score, rewards, group, friends, invites, notification, news, forum
