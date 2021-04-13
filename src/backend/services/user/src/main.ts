@@ -16,7 +16,7 @@ async function start() {
                 }
             })
 
-        app.listen(() => 
+        await app.listen(() =>
             logger.debug(`Server has started on port https://localhost:${PORT}/`))
     } catch(e) {
         logger.error(e.message)
