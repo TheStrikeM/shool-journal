@@ -3,9 +3,14 @@ syntax = "proto3";
 package user;
 
 service UserService {
-  rpc findOne(Test) returns(Test);
+  rpc FindOne(TestById) returns(Test);
+}
+
+message TestById {
+  int32 id = 1;
 }
 
 message Test {
   int32 id = 1;
+  string email = 2;
 }
