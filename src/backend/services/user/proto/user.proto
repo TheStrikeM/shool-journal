@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package user;
+
+service UserService {
+  rpc findOne(Test) returns(Test);
+}
+
+message Test {
+  int32 id = 1;
+}
