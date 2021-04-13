@@ -1,24 +1,20 @@
-import {Controller} from "@nestjs/common";
+import {Controller, UsePipes} from "@nestjs/common";
 import {GrpcMethod} from "@nestjs/microservices";
-import {Id} from "../entities/id";
-import {Email} from "../entities/email";
 import {Metadata, ServerUnaryCall} from "grpc";
-
-export interface TestById {
-    id: Id
-}
-
-export interface Test {
-    id: Id
-    email: Email
-}
+import {InjectRepository} from "@nestjs/typeorm";
+import {User} from "../entities/user";
+import {Repository} from "typeorm";
+import {FindUserDto} from "../dto/find-user.dto";
+import {ValidationPipe} from "../pipes/validation.pipe";
 
 @Controller()
-export class TestService {
+export class TestController {
+    constructor(@InjectRepository(User) private userRepository: Repository<User>) {}
+
     @GrpcMethod('UserService')
-    findOne(data: TestById, metadata: Metadata, call: ServerUnaryCall<any>): Test {
-        const items = [
-            {}
-        ]
+    @UsePipes(new ValidationPipe())
+    async findOne(data: FindUserDto, metadata: Metadata, call: ServerUnaryCall<any>): Promise<User> {
+        const { id } = data
+        return this.userRepository.findOne(id.getValue())
     }
 }
