@@ -1,7 +1,7 @@
 import {ArgumentMetadata, PipeTransform} from "@nestjs/common";
-import {ValidationException} from "../exceptions/validation.exception";
 import {validate} from "class-validator";
 import {plainToClass} from "class-transformer";
+import {RpcException} from "@nestjs/microservices";
 
 export class ValidationPipe implements PipeTransform<any> {
     async transform(value: any, metadata: ArgumentMetadata): Promise<any> {
@@ -9,11 +9,10 @@ export class ValidationPipe implements PipeTransform<any> {
         const errors = await validate(obj);
 
         if (errors.length) {
-            let messages = errors.map(err => {
-                return `${err.property} - ${Object.values(err.constraints).join(', ')}`
-            })
-            throw new ValidationException(messages)
+            let messages = errors.map(err =>
+                `${err.property} - ${Object.values(err.constraints).join(', ')}`)
+            throw new RpcException(messages)
         }
-        return value;
+        return value
     }
 }

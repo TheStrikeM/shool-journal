@@ -1,10 +1,11 @@
-import {HttpException, HttpStatus} from "@nestjs/common";
+import {ArgumentsHost, Catch, HttpException, HttpStatus, RpcExceptionFilter} from "@nestjs/common";
+import {RpcException} from "@nestjs/microservices";
+import {Observable, throwError} from "rxjs";
 
-export class ValidationException extends HttpException {
-    public messages;
-
-    constructor(response) {
-        super(response, HttpStatus.BAD_REQUEST);
-        this.messages = response
+@Catch(RpcException)
+export class ValidationException implements RpcExceptionFilter<RpcException> {
+    catch(exception: RpcException, host: ArgumentsHost): Observable<any> {
+        console.log(exception.message)
+        return throwError(exception.getError())
     }
 }
