@@ -7,17 +7,17 @@ import {Logger} from "@nestjs/common";
 const logger = new Logger('Main')
 async function start() {
     try {
-        const PORT = process.env.PORT || 5000,
-            app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-                transport: Transport.GRPC,
-                options: {
-                    package: 'user',
-                    protoPath: join(__dirname, '../proto/user.proto'),
-                }
-            })
+        const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
+            transport: Transport.GRPC,
+            options: {
+                url: '0.0.0.0:50051',
+                package: 'user',
+                protoPath: join(__dirname, '../proto/user.proto'),
+            }
+        })
 
         await app.listen(() =>
-            logger.debug(`Server has started on port https://localhost:${PORT}/`))
+            logger.debug(`Microservice has started on port https://0.0.0.0:50051'/`))
     } catch(e) {
         logger.error(e.message)
     }
