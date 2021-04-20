@@ -2,6 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/src/backend/monolit" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/backend/services/auth" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/backend/services/mailer" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/backend/services/user" vcs="Git" />
