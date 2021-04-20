@@ -4,7 +4,7 @@ import {ConfigService} from "@nestjs/config";
 
 type DatabaseConfig = Promise<TypeOrmModuleOptions> | TypeOrmModuleOptions
 @Injectable()
-export class DatabaseConfigService implements TypeOrmOptionsFactory {
+export class TypeOrmConfigService implements TypeOrmOptionsFactory {
     constructor(private readonly configService: ConfigService) {}
 
     createTypeOrmOptions(connectionName?: string): DatabaseConfig {
